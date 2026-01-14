@@ -182,7 +182,7 @@ bd create "Handoff: user auth phase 2" \
   --parent myproject-abc
 ```
 
-**New pattern:** Use any bead type with rich description following the template in `thoughts/templates/bead-description.md`.
+**New pattern:** Use any bead type with rich description following the template in `templates/bead-description.md`.
 
 **Why deprecated:**
 - Handoff is a property of the description, not the type
