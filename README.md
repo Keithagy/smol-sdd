@@ -2,7 +2,7 @@
 
 ## Why am I making this?
 
-Existing toolkits haven't worked well for me (I've tried them):
+Existing toolkits haven't worked well for me:
 
 - Speckit: [Github](https://github.com/github/spec-kit)
 - Superpowers: [Github](https://github.com/obra/superpowers)
