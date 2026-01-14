@@ -1,0 +1,6 @@
+- Make it agent-agnostic. Priorities:
+  - OpenAI Codex
+  - Amp
+  - Cursor
+- Entire SDD process, one-shottable in a ralph loop
+- Dynamic routing -- create / iterate / validate mode etc
