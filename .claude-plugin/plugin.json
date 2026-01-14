@@ -1,0 +1,7 @@
+{
+  "name": "smol-sdd",
+  "version": "0.1.0",
+  "description": "Lightweight spec-driven development workflow. Pure workflow mechanics - inject your own tribal knowledge via project-patterns skill.",
+  "keywords": ["sdd", "spec-driven", "workflow", "beads", "planning"],
+  "license": "MIT"
+}
