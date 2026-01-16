@@ -297,7 +297,10 @@ Next step: Run `/implement` and use `bd ready` to select tasks.
 
 When invoked:
 
-1. **If epic bead ID provided**: Use that epic
+1. **If epic bead ID provided**:
+   - Spawn `bd-discoverer` agent to gather context from the epic
+   - The agent will return plan link and phase structure
+   - Use that epic for status tracking
 2. **If plan file provided**: Find epic referencing that plan via description search
 3. **Check for epics in task breakdown phase**: `bd list --type=epic --status=needs_task_breakdown`
 4. **Otherwise**: Create new epic from plan

@@ -90,6 +90,12 @@ bd init
 mkdir -p thoughts/{specs,research,design,plans,handoffs}
 ```
 
+### 2.1 Configure Hooks (Handled by Beads)
+
+SmolSDD works best with session hooks that prime beads context automatically. **These hooks are configured by the beads setup subroutine**, not manually.
+
+**Note**: Do not manually create these hooks if you're using the standard beads setup. The beads CLI handles this configuration automatically.
+
 Add a README to document your structure:
 
 ```bash

@@ -272,7 +272,9 @@ Run `/research <epic-id>` again to tackle the next question.
 When invoked:
 
 1. **If epic bead ID provided** (e.g., `/research <epic-id> "question"`):
-   - Use that epic directly
+   - Spawn `bd-discoverer` agent to gather context from the epic
+   - The agent will return spec link and research questions
+   - Use that epic for status tracking
 
 2. **If research question only**:
    - Check for epics in research phase: `bd list --type=epic --status=needs_research`

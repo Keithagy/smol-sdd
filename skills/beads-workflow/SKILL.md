@@ -1,6 +1,6 @@
 ---
 name: beads-workflow
-description: This skill should be used when working with beads issue tracking, navigating epic workflow states, discovering context from bead graphs, creating tasks or epics, understanding status transitions, claiming work via bd ready, or encoding workflow progression. Essential for any agent operating under this workflow.
+description: This skill should be used when working with beads issue tracking, navigating epic workflow states, "finding context for a task", "what files should I read", "starting implementation work", "how to gather context", discovering context from bead graphs, creating tasks or epics, understanding status transitions, claiming work via bd ready, or encoding workflow progression. Essential for any agent operating under this workflow.
 context: fork
 ---
 
@@ -88,13 +88,18 @@ See `references/state-machine.md` for complete state definitions and transition 
 
 **Do NOT read files directly. Discover context via bead graph.**
 
-1. **Start**: `bd show <task-bead>` — read description, dependencies
-2. **Traverse**: Walk upward via parent relationships
-3. **Assess**: Upon reaching spec epic, is context sufficient?
-   - **YES** → Proceed with implementation
-   - **NO** → Continue to step 4
-4. **Find prereqs**: Look for research/plan/design child beads of epic
-5. **Fallback**: Read documents linked in prereq bead descriptions
+Spawn the `bd-discoverer` agent with a bead ID to get a structured context summary:
+
+```
+Task tool with subagent_type="bd-discoverer"
+Prompt: "Discover context for <bead-id>"
+```
+
+The agent traverses the bead graph and returns:
+- Epic chain and task scope
+- Key context from research/design/plan beads
+- Linked documents with specific line references
+- Dependencies, blockers, and patterns to follow
 
 ### Why Bead-First Discovery?
 
@@ -103,7 +108,7 @@ See `references/state-machine.md` for complete state definitions and transition 
 - **Documents as fallback**: Not primary source
 - **Parallel coordination**: Agents find work via `bd ready`
 
-See `references/context-discovery-protocol.md` for detailed algorithm.
+See `references/context-discovery-protocol.md` for the detailed algorithm.
 
 ## Dependency Patterns
 

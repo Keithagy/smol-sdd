@@ -423,7 +423,11 @@ See `skills/project-patterns/` for the template.
 
 When invoked:
 
-1. **If epic bead ID provided**: Use that epic
+1. **If epic bead ID provided**:
+   - Spawn `bd-discoverer` agent to gather context from the epic
+   - The agent will return spec, research, design links with key sections
+   - The design document is your "constitution" for planning
+   - Use that epic for status tracking
 2. **If design doc provided**: Find epic referencing that design via description search
 3. **Check for epics in planning phase**: `bd list --type=epic --status=needs_plan`
 4. **Otherwise**: Proceed without epic linkage

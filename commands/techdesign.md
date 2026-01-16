@@ -496,7 +496,10 @@ See `skills/project-patterns/` for the template. Projects should customize this 
 
 When invoked:
 
-1. **If epic bead ID provided**: Use that epic directly
+1. **If epic bead ID provided**:
+   - Spawn `bd-discoverer` agent to gather context from the epic
+   - The agent will return spec, research links, and key findings
+   - Use that epic for status tracking
 2. **If design context provided**: Check for epics in design phase: `bd list --type=epic --status=needs_design`
 3. **Otherwise**: Proceed without epic linkage
 

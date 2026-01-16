@@ -25,21 +25,28 @@ When this command is invoked:
 
 **IMPORTANT**: Do NOT ask for file paths to plans or design docs. Context comes from the bead graph.
 
-## Context Discovery Protocol
+## Phase 0: Context Discovery
 
-Gather context through the bead dependency graph — NOT by reading thoughts/ files directly.
+**Before implementation**, spawn the `bd-discoverer` agent to gather context:
 
-1. **Start**: `bd show <task-bead>` — read description and dependencies
-2. **Traverse**: Walk dependency graph upward, gathering context from each bead's description
-3. **Upon reaching spec epic, assess**: Does progressive disclosure from beads provide sufficient context?
-   - **YES** → Proceed with implementation
-   - **NO** → Continue to step 4
-4. **Discover prereq beads**: Find research/plan/design child beads of the spec epic
-5. **Fallback**: Only now read the actual research/plan/design documents linked in those prereq beads' descriptions
+```
+Use Task tool with subagent_type="bd-discoverer"
+Prompt: "Discover context for <bead-id>"
+```
+
+The agent will return a structured summary including:
+
+- Epic chain and task scope
+- Key context from research/design/plan beads
+- Linked documents with specific line references
+- Dependencies and blockers
+- Patterns to follow
+
+Wait for the agent to return before proceeding with implementation.
 
 ### Design Documents as Constitution
 
-When you discover a design document via the bead graph (step 5), treat it as authoritative for:
+When a design document is scope, size it up for:
 
 - **State management**: Where state lives and why
 - **Type decisions**: Which fields use which types
@@ -49,7 +56,7 @@ When you discover a design document via the bead graph (step 5), treat it as aut
 
 When you encounter tactical decisions during implementation, consult the design document's principles. If the design doesn't cover it, use your judgment aligned with the design's philosophy.
 
-If you discover that implementation cannot follow the design, **STOP** and flag this:
+If you discover that implementation cannot follow the design, or you judge that the design could be controversial or misinformed, **STOP** and flag this:
 
 ```
 Design Conflict Detected:
@@ -99,6 +106,7 @@ Plans are carefully designed, but reality can be messy. Your job is to:
 - Verify your work makes sense in the broader codebase context
 - Update checkboxes in the plan as you complete sections
 - Avoid overdocumenting: Are you adding meaningless comments to one-liners that can drift and rot?
+- Be laconic, not inscrutable: Aim for that lightweight, distilled feel that all great code has.
 
 When things don't match the plan exactly, think about why and communicate clearly.
 
@@ -177,6 +185,7 @@ When verifying completed work (e.g., `/implement verify bead-abc` or when asked 
    - Check bead descriptions for plan references
 
 2. **Gather bead state**:
+
    ```bash
    bd show <bead-id>
    bd list --status=in_progress  # Related active work
@@ -194,11 +203,13 @@ When verifying completed work (e.g., `/implement verify bead-abc` or when asked 
 ## Validation Report: [Plan Name]
 
 ### Implementation Status
+
 ✓ Phase 1: [Name] - Fully implemented
 ✓ Phase 2: [Name] - Fully implemented
 ⚠️ Phase 3: [Name] - Partially implemented (see issues)
 
 ### Automated Verification Results
+
 ✓ Build passes
 ✓ Tests pass
 ✗ Linting issues: [details]
@@ -206,30 +217,37 @@ When verifying completed work (e.g., `/implement verify bead-abc` or when asked 
 ### Code Review Findings
 
 #### Matches Plan:
+
 - [What was implemented correctly]
 
 #### Deviations from Plan:
+
 - [Any differences and whether they're improvements or issues]
 
 #### Potential Issues:
+
 - [Problems found]
 
 ### Manual Testing Required:
+
 1. [ ] [Verification step]
 2. [ ] [Another step]
 
 ### Recommendations:
+
 - [Actions needed before merge]
 ```
 
 ### Verification Status Transitions
 
 **On validation success**:
+
 ```bash
 bd update <epic-id> --status testing
 ```
 
 **On testing complete** (user confirms):
+
 ```bash
 bd close <epic-id> --reason "Validated and tested successfully"
 ```
@@ -239,6 +257,7 @@ bd close <epic-id> --reason "Validated and tested successfully"
 After successful validation:
 
 1. **Close all task beads** associated with this plan:
+
    ```bash
    bd close <id1> <id2> ... --reason "Validated: [summary]"
    ```
@@ -263,6 +282,7 @@ git commit -m "[<task-bead-id>] <descriptive message>"
 ```
 
 Example:
+
 ```bash
 git commit -m "[bead-xyz] Add margin validation to risk service"
 ```
