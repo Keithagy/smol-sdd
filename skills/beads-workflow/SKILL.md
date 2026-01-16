@@ -1,6 +1,7 @@
 ---
 name: beads-workflow
 description: This skill should be used when working with beads issue tracking, navigating epic workflow states, discovering context from bead graphs, creating tasks or epics, understanding status transitions, claiming work via bd ready, or encoding workflow progression. Essential for any agent operating under this workflow.
+context: fork
 ---
 
 # Beads Workflow Encoding
@@ -62,15 +63,15 @@ open → needs_spec → needs_research → researching → needs_research_review
 
 ### Command → Status Transitions
 
-| Command       | On Start       | On Complete                   |
-| ------------- | -------------- | ----------------------------- |
-| `/spec`       | —              | `needs_research`              |
-| `/research`   | `researching`  | `needs_research_review`       |
-| `/techdesign` | `designing`    | `needs_design_review`         |
-| `/plan`       | `planning`     | `needs_plan_review`           |
-| `/taskify`    | —              | `needs_implementation`        |
-| `/implement`  | `implementing` | `needs_implementation_review` |
-| `/implement --validate` | `testing`      | `closed`              |
+| Command                 | On Start       | On Complete                   |
+| ----------------------- | -------------- | ----------------------------- |
+| `/spec`                 | —              | `needs_research`              |
+| `/research`             | `researching`  | `needs_research_review`       |
+| `/techdesign`           | `designing`    | `needs_design_review`         |
+| `/plan`                 | `planning`     | `needs_plan_review`           |
+| `/taskify`              | —              | `needs_implementation`        |
+| `/implement`            | `implementing` | `needs_implementation_review` |
+| `/implement --validate` | `testing`      | `closed`                      |
 
 ### Human Gates
 
@@ -147,8 +148,8 @@ See `references/artifact-linking.md` for linking conventions.
 
 ## Commit Tagging
 
-| Commit Type               | Tag With     | Example                                     |
-| ------------------------- | ------------ | ------------------------------------------- |
+| Commit Type               | Tag With     | Example                                      |
+| ------------------------- | ------------ | -------------------------------------------- |
 | Spec/research/design/plan | Epic bead ID | `[myproject-abc] spec(feature): Add spec`    |
 | Implementation code       | Task bead ID | `[myproject-xyz] feat(feature): Implement X` |
 
